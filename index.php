@@ -21,7 +21,15 @@
     </table>
 </div>
 <div id="detail">
-    sssssss
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th> <th>Title</th><th> User id </th>
+            </tr>
+        </thead>
+        <tbody id="tbltdetails">
+        </tbody>
+    </table>
 </div>
     
 </body>
@@ -33,6 +41,14 @@
         $.getJSON(url)
             .done((data)=>{
                 console.log(data);
+
+                var line = "<tr id='details'";
+                    line += "><td>" + data.id + "</td>"
+                    line += "<td><b>" + data.title + "</b><br/>"
+                    line += data.body + "</td>"
+                    line += "<td>" + data.userId + "</td>"
+                    line += "</tr>";
+                    $("#tbldetails").append(line);
             })
             .fail((xhr, status, error)=>{
             })
@@ -59,10 +75,14 @@
             .fail((xhr, status, error)=>{
             })
     }
-    $(()=>{
-        loadPosts();
-        $("#btnBack").click(()=>{
+    $(() => {
+        LoadPosts();
+        $("#detail").hide();
+        
             $("#main").show();
+            $("#btnBack").click(() => {
+            $("#main").show();
+            $("#details").remove();
         });
     })
 </script>
